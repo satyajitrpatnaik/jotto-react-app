@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Congrats from './Congrats';
-import { findByTestAttr } from './../../test/testUtils';
+import { findByTestAttr, checkProps } from './../../test/testUtils';
 
 describe('<Congrats />', () => {
 
@@ -32,6 +32,12 @@ describe('<Congrats />', () => {
     const wrapper = setupWrapper({ success: true });
     const message = findByTestAttr(wrapper, 'congrats-message');
     expect(message.text().length).not.toBe(0);
+  });
+
+  it('does not throw warnings with expected props', () => {
+    const expectedProps = { success: false };
+    const propError = checkProps(Congrats, expectedProps);
+    expect(propError).toBeUndefined();
   });
 
 });

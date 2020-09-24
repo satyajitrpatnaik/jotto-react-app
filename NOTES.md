@@ -19,5 +19,5 @@
 ```
 yarn add prop-types
 ```
-  * Supporting Library - `checkPropTypes` returns back the warnings in the unit tests, otherwise we would
+  * Supporting Library - `checkPropTypes` returns back the warnings in the unit tests as errors, otherwise we would
   have to mock `console.error` to know about the warning thrown by PropTypes.
