@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const Congrats = (props) => {
   if (props.success) {
     return (
-      <div data-text="component-congrats">
+      <div data-text="component-congrats" className="alert alert-success">
         <span data-test="congrats-message">
           Congratulations, you guessed the correct word!
         </span>
@@ -17,7 +17,7 @@ const Congrats = (props) => {
     )
   } else {
     return (
-      <div data-test="component-congrats"></div>
+      <div data-test="component-congrats" />
     )
   }
 };
