@@ -9,7 +9,6 @@ describe('successReducer', () => {
 
   it('returns state as true if CORRECT_GUESS action was invoked', () => {
     const newState = successReducer(undefined, { type: CORRECT_GUESS, flag: true });
-    console.log(newState);
     expect(newState).toBe(true);
   });
 });
