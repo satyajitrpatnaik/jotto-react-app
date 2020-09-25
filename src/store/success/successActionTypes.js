@@ -1,1 +1,1 @@
-export const SET_SUCCESS = 'SET_SUCCESS';
+export const CORRECT_GUESS = 'CORRECT_GUESS';

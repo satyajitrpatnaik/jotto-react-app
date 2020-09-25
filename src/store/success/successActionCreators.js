@@ -1,8 +1,8 @@
-import { SET_SUCCESS } from "./successActionTypes";
+import { CORRECT_GUESS } from "./successActionTypes";
 
 export const setSuccess = (flag) => {
   return {
-    type: SET_SUCCESS,
+    type: CORRECT_GUESS,
     flag: flag
   }
 };
