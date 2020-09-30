@@ -53,7 +53,6 @@ describe('<Input />', () => {
 
     it('does not render the input box', () => {
       const inputBox = findByTestAttr(wrapper, 'input-box');
-      console.log(inputBox.debug());
       expect(inputBox.length).toBe(0);
     });
 

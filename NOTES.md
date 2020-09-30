@@ -1,7 +1,7 @@
 ## Notes for setting up react unit testing
 
 - Run `yarn test` for running Jest in watch mode.
-- Run `yarn test -- --coverage` for getting code coverage report.
+- Run `yarn test -- --coverage --watchAll=false` for getting code coverage report.
 - `Jest` looks for unit tests in files with name pattern - `*.spec.js` or `*.test.js` or in the `__test` folder.
 - `Enzyme` creates a virtual DOM for testing. It allows testing without a browser. CRA provides React DOM for the unit testing, but Enzyme has better toolkit.
 - `Shallow Rendering` renders components one level deep and only placeholders for nested components.
