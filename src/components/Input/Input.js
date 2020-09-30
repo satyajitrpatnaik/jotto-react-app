@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { guessWord } from './../../store/guessedWords/guessedWordsActionTypes';
+
 class Input extends Component {
 
   render() {
@@ -26,7 +28,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    guessWord: (dispatch) => guessWord()
   }
 }
 
