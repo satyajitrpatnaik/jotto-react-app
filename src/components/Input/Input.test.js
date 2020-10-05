@@ -1,10 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { checkProps, findByTestAttr } from './../../test/testUtils';
 import Input from './Input';
+import LanguageContext from './../../contexts/LanguageContext';
 
-const setup = (secretWord='party') => {
-  return shallow(<Input secretWord={secretWord}/>);
+const setup = ({ language, secretWord }) => {
+  language = language || 'en';
+  secretWord = secretWord || 'party';
+  return mount(
+    <LanguageContext.Provider value={language}>
+      <Input secretWord={secretWord}/>
+    </LanguageContext.Provider>
+  );
 }
 
 describe('<Input />', () => {
@@ -12,7 +19,7 @@ describe('<Input />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup();
+    wrapper = setup({});
   });
   
   it('renders without any errors', () => {
@@ -21,7 +28,7 @@ describe('<Input />', () => {
   });
 
   it('does not throw any warnings with expected props', () => {
-    checkProps(Input, { secretWord: 'party' });
+    checkProps(Input, {secretWord: 'party' });
   });
 
   describe('state controlled input field', () => {
@@ -32,7 +39,7 @@ describe('<Input />', () => {
     beforeEach(() => {
       mockSetCurrentGuess.mockClear();
       React.useState = jest.fn(() => [ '', mockSetCurrentGuess ]);
-      wrapper = setup();
+      wrapper = setup({});
     });
 
     it('state updates with value of input box upon change', () => {
@@ -45,12 +52,24 @@ describe('<Input />', () => {
     });
 
     it('field is cleared upon submit button click', () => {
-      const mockSetCurrentGuess = jest.fn();
       React.useState = jest.fn(() => [ '', mockSetCurrentGuess ]);
-      const wrapper = setup();
       const submitButton = findByTestAttr(wrapper, 'submit-button');
       submitButton.simulate('click', { preventDefault() {} });
       expect(mockSetCurrentGuess).toHaveBeenCalledWith('');
+    });
+  });
+
+  describe('language picker', () => {
+    it('renders english word for submit button when language is english', () => {
+      const wrapper = setup({});
+      const submitButton = findByTestAttr(wrapper, 'submit-button');
+      expect(submitButton.text()).toBe('Submit');
+    });
+
+    it('renders emoji word for submit button when language is emoji', () => {
+      const wrapper = setup({ language: 'emoji' });
+      const submitButton = findByTestAttr(wrapper, 'submit-button');
+      expect(submitButton.text()).toBe('🚀');
     });
   });
   
