@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../contexts/LanguageContext';
+import SuccessContext from './../../contexts/SuccessContext';
 import StringsModule from './../../helpers/strings';
 
 const Input = ({ secretWord }) => {
 
+  const [success, setSuccess] = SuccessContext.useSuccess();
+
   const [ currentGuess, setCurrentGuess ] = React.useState('');
 
   const language = React.useContext(LanguageContext);
+
+  if (success) {
+    return null;
+  }
 
   return (
     <div data-test="component-input">
