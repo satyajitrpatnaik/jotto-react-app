@@ -2,8 +2,9 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Congrats from './Congrats';
-import { findByTestAttr, checkProps } from '../../test/testUtils';
+import { findByTestAttr } from '../../test/testUtils';
 import LanguageContext from './../../contexts/LanguageContext';
+import SuccessContext from './../../contexts/SuccessContext';
 
 describe('<Congrats />', () => {
 
@@ -14,7 +15,9 @@ describe('<Congrats />', () => {
     success = success || false;
     return mount(
       <LanguageContext.Provider value={language}>
-        <Congrats success={success}/>
+        <SuccessContext.SuccessProvider value={[ success, jest.fn()]}>
+          <Congrats />
+        </SuccessContext.SuccessProvider>
       </LanguageContext.Provider>
     );
   };
@@ -51,12 +54,6 @@ describe('<Congrats />', () => {
     const wrapper = setupWrapper({ success: true });
     const message = findByTestAttr(wrapper, 'congrats-message');
     expect(message.text().length).not.toBe(0);
-  });
-
-  it('does not throw warnings with expected props', () => {
-    const expectedProps = { success: false };
-    const propError = checkProps(Congrats, expectedProps);
-    expect(propError).toBeUndefined();
   });
 
 });
